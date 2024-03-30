@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// @ts-ignore
+import type { Option } from '../utils/types'
 import {
   Select,
   SelectContent,
@@ -6,8 +8,18 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from '@/components/ui/select'
+
+const props = defineProps<{
+  options: Option[]
+}>()
+
+const selectedType = defineModel<string>()
+
+const updateSelected = (value: string) => {
+  selectedType.value = value
+}
 </script>
 
 <template>
@@ -16,13 +28,14 @@ import {
       <SelectValue placeholder="Select a question type" />
     </SelectTrigger>
     <SelectContent>
-        <SelectLabel>Select Type</SelectLabel>
       <SelectGroup>
-        <SelectItem value="Choice">
-            Choice
-        </SelectItem>
-        <SelectItem value="Open ended">
-            Open ended
+        <SelectItem
+          @click="updateSelected(option.value)"
+          v-for="(option, index) in props.options"
+          :key="index"
+          :value="option.value"
+        >
+          {{ option.key }}
         </SelectItem>
       </SelectGroup>
     </SelectContent>

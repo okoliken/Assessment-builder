@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+// @ts-ignore
+import type { Option } from '../utils/types'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -7,16 +8,20 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-const selected = ref('1 point')
+const selected = defineModel()
+
+
 
 const updateSelected = (value: string) => {
     selected.value = value
 }
 
 
-const props = defineProps({
-    icon: String
-})
+const props = defineProps<{
+    icon: string,
+    options: Option[]
+}>()
+
 </script>
 
 <template>
@@ -24,8 +29,7 @@ const props = defineProps({
         <DropdownMenuTrigger class="hover:bg-slate-400/20">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-x-1">
-                    <Icon :icon="props.icon"
-                        class="text-[#404a5a] cursor-pointer text-[22px]" />
+                    <Icon :icon="props.icon" class="text-[#404a5a] cursor-pointer text-[22px]" />
                     <span class="text-[14px] text-[#404A5A]">{{ selected }}</span>
                 </div>
                 <Icon icon="iconamoon:arrow-down-2-light" class="text-[22px] text-[#404A5A]" />
@@ -33,8 +37,8 @@ const props = defineProps({
 
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-            <DropdownMenuItem @click="updateSelected('Profile')">Profile</DropdownMenuItem>
-            <DropdownMenuItem @click="updateSelected('Billing')">Billing</DropdownMenuItem>
+            <DropdownMenuItem v-for="(option, index) in  props.options" :key="index"
+                @click="updateSelected(option.value)">{{ option.key }}</DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>
 </template>

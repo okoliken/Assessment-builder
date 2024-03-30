@@ -9,8 +9,10 @@ import {
 } from '@/components/ui/card'
 </script>
 
+<!-- border-2 border-[#489955]  -->
+
 <template>
-    <Card class="mb-2 border-2 border-[#489955]">
+    <Card class="mb-2 hover:bg-slate-50 cursor-pointer">
         <CardHeader>
             <div class="flex items-center justify-between border-b pb-[5px] border-[#DBDCDE]">
                 <p class="text-[#00AD1B] font-medium text-[16px]">1</p>
