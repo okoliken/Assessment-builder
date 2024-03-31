@@ -15,7 +15,7 @@ import { toast } from 'vue-sonner'
 
 const dispatch = defineEmits(['shareFiles'])
 
-const onDrop = async (acceptedFiles: File[], rejectedFiles: RejectedFile[]) => {
+const onDrop = async (acceptedFiles: File[]) => {
     if (acceptedFiles.length <= 0) {
         return;
     }
