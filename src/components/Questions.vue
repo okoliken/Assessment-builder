@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Questions } from '@/utils/types';
+import { computed }  from 'vue'
 import {
     Card,
     CardContent,
@@ -28,14 +29,18 @@ const setSelectedQuestion = (question: Questions) => {
 const deleteQuestion = (id: string) => {
     assessmentQuestions.value = assessmentQuestions.value.filter((question) => question.id !== id)
 }
+
+const isSelected = computed(() => {
+    return selectedQuestion.value.id === questions.id
+})
 </script>
 
 <template>
-    <Card class="mb-2 hover:bg-slate-50 cursor-pointer">
+    <Card :class="[isSelected ? 'border-2 border-[#00AD1B]' : null]" class="mb-2 hover:bg-slate-50 cursor-pointer">
         <CardHeader>
             <div class="flex items-center justify-between border-b pb-[5px] border-[#DBDCDE]">
                 <p class="text-[#00AD1B] font-medium text-[16px]">{{ index + 1 }}</p>
-                <Icon icon="line-md:grid-3-filled" class="text-[#98A2B3] cursor-pointer text-[18px]" />
+                <Icon icon="line-md:grid-3-filled" class="text-[#98A2B3] cursor-grab text-[18px]" />
             </div>
         </CardHeader>
         <CardContent  @click="setSelectedQuestion(questions)">
