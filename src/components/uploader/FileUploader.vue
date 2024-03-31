@@ -22,6 +22,7 @@ const onDrop = async (acceptedFiles: File[]) => {
 
     if (result.isValid) {
         selectedQuestion.value.files = [...selectedQuestion.value.files, ...acceptedFiles];
+        toast.success(result.message)
     } else {
         if (!result.isValid) {
             toast.error(String(validationResult.value?.message))

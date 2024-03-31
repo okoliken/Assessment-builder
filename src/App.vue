@@ -3,7 +3,6 @@ import { BuilderNav } from '@/components/ui/index'
 import BuilderLayout from './layout/BuilderLayout.vue'
 import Questions from './components/Questions.vue'
 import draggable from 'vuedraggable'
-// @ts-ignore
 import QuestionBuilder from './components/QuestionBuilder.vue'
 
 import { Toaster } from '@/components/ui/sonner'
