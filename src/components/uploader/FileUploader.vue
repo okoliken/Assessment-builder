@@ -2,8 +2,6 @@
 // @ts-ignore
 import { useDropzone } from "vue3-dropzone";
 // @ts-ignore
-import type { RejectedFile } from './index'
-// @ts-ignore
 import { useBuilderStore } from '../../stores/builder.ts'
 import { storeToRefs } from 'pinia'
 // @ts-ignore
