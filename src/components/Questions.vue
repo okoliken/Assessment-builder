@@ -12,8 +12,8 @@ const { questions, index } = defineProps<{
     index: number
 }>()
 
-// @ts-ignore
-import { useBuilderStore } from '../stores/builder.ts'
+
+import { useBuilderStore } from '../stores/builder'
 import { storeToRefs } from 'pinia'
 
 

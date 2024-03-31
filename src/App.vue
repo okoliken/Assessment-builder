@@ -1,19 +1,15 @@
 <script setup lang="ts">
-// @ts-ignore
 import { BuilderNav } from '@/components/ui/index'
-// @ts-ignore
 import BuilderLayout from './layout/BuilderLayout.vue'
-// @ts-ignore
 import Questions from './components/Questions.vue'
 import draggable from 'vuedraggable'
 // @ts-ignore
 import QuestionBuilder from './components/QuestionBuilder.vue'
-// @ts-ignore
-import { Toaster } from '@/components/ui/sonner'
-// @ts-ignore
-import { useBuilderStore } from './stores/builder.ts'
-import { storeToRefs } from 'pinia'
 
+import { Toaster } from '@/components/ui/sonner'
+
+import { useBuilderStore } from './stores/builder'
+import { storeToRefs } from 'pinia'
 
 const { openBuilder, questions } = storeToRefs(useBuilderStore())
 

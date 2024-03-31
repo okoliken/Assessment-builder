@@ -12,14 +12,12 @@ import { Label } from '@/components/ui/label'
 import File from './File.vue'
 import type { Option } from '../utils/types'
 import { Button } from '@/components/ui/button'
-// @ts-ignore
-import { useBuilderStore } from '../stores/builder.ts'
+import { useBuilderStore } from '../stores/builder'
 import { storeToRefs } from 'pinia'
 
-import { useForm, useField } from 'vee-validate';
+import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod'
-// @ts-ignore
-import { formSchema } from '../utils/schema.ts'
+import { formSchema } from '../utils/schema'
 
 
 import {
