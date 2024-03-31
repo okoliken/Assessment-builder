@@ -35,7 +35,7 @@ const deleteQuestion = (id: string) => {
         <CardHeader>
             <div class="flex items-center justify-between border-b pb-[5px] border-[#DBDCDE]">
                 <p class="text-[#00AD1B] font-medium text-[16px]">{{ index + 1 }}</p>
-                <Icon icon="line-md:grid-3-filled" class="text-[#98A2B3] cursor-pointer text-[18px]" />
+                <Icon :icon="questions.icon" class="text-[#98A2B3] cursor-pointer text-[18px]" />
             </div>
         </CardHeader>
         <CardContent  @click="setSelectedQuestion(questions)">
