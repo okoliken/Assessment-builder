@@ -39,8 +39,8 @@ export const useBuilderStore = defineStore('builder', () => {
     },
     {
       id: uuidv4(),
-      icon: 'material-symbols-light:check-box-outline',
-      question: 'Queen guitarist Brian May is also an expert in what scientific field?',
+      icon: 'gravity-ui:text',
+      question: 'Queen guitarist Brian May is an expert in what scientific field?',
       type: 'Open ended',
       files: [],
       answers: [
@@ -55,7 +55,7 @@ export const useBuilderStore = defineStore('builder', () => {
     },
     {
       id: uuidv4(),
-      icon: 'material-symbols-light:check-box-outline',
+      icon: 'mynaui:upload',
       question: 'What artist has the most streams on Spotify in the world? ',
       type: 'Open ended',
       files: [],
