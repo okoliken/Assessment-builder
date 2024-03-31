@@ -49,7 +49,7 @@ defineExpose({
     <div @click="TriggerFileSelector"
         class="border border-[#DBDCDE] flex items-center justify-center flex-col w-full py-[16px] px-[24px] rounded-[4px] hover:bg-[#00AD1B]/10 cursor-pointer hover:border-dashed hover:border-2">
         <div class="flex items-center justify-center flex-col gap-y-3" v-bind="getRootProps()">
-            <input type="file" accept=".svg, .png, .jpg, .jpeg, .gif" v-bind="getInputProps()" />
+            <input v-bind="getInputProps()" />
             <div class="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-[#F2F4F7]">
                 <Icon icon="lucide:cloud-upload" />
             </div>
