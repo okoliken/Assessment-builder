@@ -30,9 +30,11 @@
   font-style: normal;
 }
 
+
 body {
   font-family: 'Graphik', sans-serif !important;
   /* overflow-y: hidden; */
+  
 }
 
 p {

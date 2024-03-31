@@ -11,27 +11,36 @@ import { useFileValidation } from '../../composables/useFileValidation.ts'
 
 const { selectedQuestion } = storeToRefs(useBuilderStore())
 const { validateFile, validationResult } = useFileValidation();
+import { toast } from 'vue-sonner'
 
+const dispatch = defineEmits(['shareFiles'])
 
-const onDrop = (acceptedFiles: File[], rejectedFiles: RejectedFile[]) => {
-
+const onDrop = async (acceptedFiles: File[], rejectedFiles: RejectedFile[]) => {
     if (acceptedFiles.length <= 0) {
-        return
+        return;
     }
 
-    validateFile(acceptedFiles[0]);
+    const result = await validateFile(acceptedFiles[0]);
 
-    if (validationResult.value?.isValid) {
-        selectedQuestion.value.files = [...selectedQuestion.value.files, ...acceptedFiles]
+    if (result.isValid) {
+        selectedQuestion.value.files = [...selectedQuestion.value.files, ...acceptedFiles];
+    } else {
+        if (!result.isValid) {
+            toast.error(String(validationResult.value?.message))
+        }
     }
-    else {
-        console.log(rejectedFiles, validationResult.value?.message);
-    }
 
-
-}
+    dispatch('shareFiles', selectedQuestion.value.files)
+};
 
 const { getRootProps, getInputProps, open: TriggerFileSelector, isDragActive } = useDropzone({ onDrop });
+
+
+defineExpose({
+    TriggerFileSelector
+})
+
+
 
 
 </script>

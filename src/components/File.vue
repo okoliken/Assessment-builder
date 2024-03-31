@@ -1,66 +1,104 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, computed, onBeforeMount } from 'vue'
 // @ts-ignore
 import { Progress } from '@/components/ui/progress'
 
 const progress = ref(13)
+const isUploaded = ref(false)
 
 watchEffect((cleanupFn) => {
+    if(isUploaded.value) {
+        const timer = setTimeout(() => progress.value = 100, 500)
+       cleanupFn(() => clearTimeout(timer))
+    }
+   else{
     const timer = setTimeout(() => progress.value = 66, 500)
     cleanupFn(() => clearTimeout(timer))
+   }
 })
 
 
-const { icon, size, fileName} = defineProps({
-    icon: String,
-    size: String,
-    fileName: String
+
+const fileSizeInKBOrMb = computed(() => {
+    const oneKB = 1024;
+    const oneMB = 1024 * oneKB;
+
+    if (props.file) {
+        const { size } = props.file
+        if (typeof props.file?.size === 'number') {
+            if (size >= oneMB) {
+                return (size / oneMB).toFixed(2) + ' MB';
+            }
+
+            else if (size >= oneKB) {
+                return (size / oneKB).toFixed(2) + ' KB';
+            }
+
+            else {
+                return size + ' bytes';
+            }
+        }
+    }
+
 })
 
+const props = defineProps({
+    file: File,
+    icon: String
+})
+
+
+
+const uploadFiles = async (file: File) => {
+    const file_info = file;
+    if (!file_info) return;
+
+    try {
+     
+        const formData = new FormData();
+        formData.append('file', file_info);
+        formData.append('upload_preset', 'sagyopec');
+
+        
+        const response = await fetch(`https://api.cloudinary.com/v1_1/dnhtq3hdg/image/upload`, {
+            method: 'POST',
+            body: formData,
+        });
+
+      if (response.ok) {
+        isUploaded.value = true
+      }
+
+    } catch (error) {
+      return error
+    }
+}
+
+
+onBeforeMount(() => {
+    if (props.file) {
+        uploadFiles(props.file) 
+    }
+})
 </script>
 
 
 <template>
-    <div class="border border-[#DBDCDE] p-[16px] h-[96px] my-2">
+    <div class="border border-[#DBDCDE] hover:bg-slate-50 p-[16px] h-[96px] my-2">
         <div class="flex items-start gap-x-3 w-full">
             <div class="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-[#BDFFC7]">
                 <Icon :icon="icon" class="text-[#00AD1B]" />
             </div>
             <div class="w-full">
-               <div class="flex items-center justify-between">
-                <p class="text-[#101828] text-[14px] font-medium mb-px">{{fileName}}</p>
-                <Icon icon="solar:trash-bin-minimalistic-linear" class="text-[22px] text-[#475467] cursor-pointer" />
-               </div>
-                <p class="text-[#404A5A]">{{size}}</p>
+                <div class="flex items-center justify-between">
+                    <p class="text-[#101828] text-[14px] font-medium mb-px">{{ props.file?.name }}</p>
+                    <Icon icon="solar:trash-bin-minimalistic-linear"
+                        class="text-[22px] text-[#475467] cursor-pointer" />
+                </div>
+                <p class="text-[#404A5A]">{{ fileSizeInKBOrMb }}</p>
                 <Progress v-model="progress" class="w-full my-2" />
             </div>
 
         </div>
     </div>
 </template>
-
-
-/* _File upload item base */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-align-items: flex-start;
-padding: 16px;
-gap: 4px;
-isolation: isolate;
-
-width: 600px;
-height: 96px;
-
-background: #FFFFFF;
-border: 1px solid #DBDCDE;
-border-radius: 0px;
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-align-self: stretch;
-flex-grow: 0;

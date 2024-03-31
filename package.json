@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.41.1",
     "@vee-validate/zod": "^4.12.6",
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
@@ -25,6 +26,7 @@
     "uuid": "^9.0.1",
     "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
+    "vue-sonner": "^1.1.2",
     "vue3-dropzone": "^2.2.1",
     "vuedraggable": "^4.1.0",
     "zod": "^3.22.4"

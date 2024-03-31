@@ -1,13 +1,11 @@
-
-
 <script setup lang="ts">
 
-    // @ts-ignore
-    import StepperHeader from '../components/StepperHeader.vue'
-    // @ts-ignore
-    import StepperStep from '../components/StepperStep.vue'
+// @ts-ignore
+import StepperHeader from '../components/StepperHeader.vue'
+// @ts-ignore
+import StepperStep from '../components/StepperStep.vue'
 
-    import { steps } from '.'
+import { steps } from '.'
 </script>
 
 <template>
@@ -18,7 +16,9 @@
             <div>
                 <StepperHeader>
                     <ul class="mt-6 w-full">
-                        <StepperStep v-for="(step, index) in steps" :key="index"  :icon="step.icon" :content="step.content" :isCompleted="step.isCompleted" :title="step.title"/>
+                        <StepperStep v-for="(step, index) in steps" :key="index" :icon="step.icon"
+                            :content="step.content" :isCompleted="step.isCompleted" :title="step.title"
+                            :isActive="step.isActive" />
                     </ul>
                 </StepperHeader>
             </div>
@@ -26,5 +26,3 @@
         <slot></slot>
     </div>
 </template>
-
-

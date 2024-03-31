@@ -30,7 +30,7 @@ const props = defineProps<{
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-x-1">
                     <Icon :icon="props.icon" class="text-[#404a5a] cursor-pointer text-[22px]" />
-                    <span class="text-[14px] text-[#404A5A]">{{ selected }}</span>
+                    <span class="text-[14px] text-[#404A5A]">{{ selected || 'Select' }}</span>
                 </div>
                 <Icon icon="iconamoon:arrow-down-2-light" class="text-[22px] text-[#404A5A]" />
             </div>

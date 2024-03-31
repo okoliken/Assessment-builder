@@ -3,7 +3,7 @@ export type Questions = {
   icon: string
   question: string
   type: string
-  files: File[]
+  files: any[]
   answers: Answers[],
   points: string,
   duration: string
@@ -13,7 +13,7 @@ export type Questions = {
 export type Answers = {
     id: string,
     answer:string,
-    optional_answer?:string
+    optional_answer:string
 }
 
 

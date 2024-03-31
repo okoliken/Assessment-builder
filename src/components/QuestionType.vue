@@ -12,7 +12,8 @@ import {
 } from '@/components/ui/select'
 
 const props = defineProps<{
-  options: Option[]
+  options: Option[],
+  class?: string
 }>()
 
 const selectedType = defineModel<string>()
@@ -24,7 +25,7 @@ const updateSelected = (value: string) => {
 
 <template>
   <Select class="w-full">
-    <SelectTrigger class="w-full">
+    <SelectTrigger :class="class" class="w-full">
       <SelectValue placeholder="Select a question type" />
     </SelectTrigger>
     <SelectContent>
